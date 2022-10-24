@@ -8,14 +8,15 @@ using Queue;
 
 namespace Queue_and_Trees
 {
-    public class TimeCHeck
+    public class TimeCheck
     {
-        public void TimeCheck(string fileName, string path)
+        public void MemoryChecking(string fileName, string path)
         {
             List<string> list = new List<string>();
             StringBuilder sb = new StringBuilder();
             Stopwatch sw = Stopwatch.StartNew();
             string[] file = FileRead(path);
+
             for (int i = 0; i < file.Length; i += 10)
             {
                 WorkForQueue(new ArraySegment<string>(file, 1, i));
@@ -23,15 +24,27 @@ namespace Queue_and_Trees
                 list.Add(sb.ToString());
                 sb.Clear();
             }
-            /*for (int i = 0; i < file.Length; i += 10)
+
+            File.WriteAllLines($"{fileName}.csv", list);
+        }
+
+        public void TimeChecking(string fileName, string path)
+        {
+            List<string> list = new List<string>();
+            StringBuilder sb = new StringBuilder();
+            Stopwatch sw = Stopwatch.StartNew();
+            string[] file = FileRead(path);
+
+            for (int i = 0; i < file.Length; i += 10)
             {
                 sw.Start();
-                WorkForStack(new ArraySegment<string>(file, 1, i));
+                WorkForQueue(new ArraySegment<string>(file, 1, i));
                 sb.Append($"{i};{sw.Elapsed.TotalMilliseconds}");
                 sw.Stop();
                 list.Add(sb.ToString());
                 sb.Clear();
-            }*/
+            }
+
             File.WriteAllLines($"{fileName}.csv", list);
         }
 
